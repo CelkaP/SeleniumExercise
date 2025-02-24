@@ -1,15 +1,12 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
-from setup import setup_driver
 
 WEBSITE_URL = "https://blog.griddynamics.com"
 
 
 def main():
-    driver = setup_driver(WEBSITE_URL)
-    # find_articles(driver)
-    get_in_touch(driver)
+    pass
 
 
 def get_in_touch(driver):
