@@ -16,7 +16,7 @@ class LeadershipPage:
     @property
     def leonard(self):
         WebDriverWait(self.__driver, 5).until(
-            ec.visibility_of_element_located((By.XPATH, Locator.leonard))
+            ec.element_to_be_clickable((By.XPATH, Locator.leonard))
         )
         return self.__driver.find_element(By.XPATH, Locator.leonard)
 
