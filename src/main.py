@@ -2,11 +2,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 
+import src.setup
+from src.page_object.locators import Locator
+from src.test_base.web_driver_setup import web_driver_setup
+from tests.scripts.test_leonard_position import driver
+
 WEBSITE_URL = "https://blog.griddynamics.com"
 
 
 def main():
-    pass
+    driver = web_driver_setup()
+    find_leonard_position(driver)
 
 
 def get_in_touch(driver):
@@ -150,29 +156,40 @@ def find_leonard_position(driver):
     3. Find Leonard Livschitz and click on the name
     4. Verify that information about Leonard has appeared.
     The text “Chief Executive Officer and Director” is visible.
-      :return: Leonard Livschitz's position as a string.
+
+    :return: Leonard Livschitz's position and bio as a string.
     """
-    leadership_under_about_xpath_locator = "//li[@id = 'menu-item-38744']//a[@href='https://www.griddynamics.com/leadership']"
-    WebDriverWait(driver, 5).until(
-        ec.presence_of_element_located((By.XPATH, leadership_under_about_xpath_locator))
-    )
-    leadership_under_about_link = driver.find_element(
-        By.XPATH, leadership_under_about_xpath_locator
-    )
-    leadership_under_about_link.click()
-    leonard_xpath_locator = (
-        "//div [@class = 'team-grid__container team-grid__container--7']/*[1]"
-    )
-    leonard = driver.find_element(By.XPATH, leonard_xpath_locator)
-    leonard.click()
-    leonard_position_locator = "//div [@class = 'team-grid__container team-grid__container--7']/*[1]/div[@class ='team-grid__info']/*[2]/p"
-    WebDriverWait(driver, 5).until(
-        ec.visibility_of_element_located((By.XPATH, leonard_position_locator))
-    )
+
+    # Step 1: Click Leadership link
+    leadership_link = "//li[@id = 'menu-item-38744']//a[contains(@href, 'leadership')]"
+    WebDriverWait(driver, 5).until(ec.element_to_be_clickable((By.XPATH, leadership_link)))
+    driver.find_element(By.XPATH, leadership_link).click()
+
+    # Step 2: Click Leonard's profile
+    leonard_profile = "//div[contains(@class, 'team-grid__container')]/div[contains(@class, 'team-grid__item')][1]"
+    WebDriverWait(driver, 5).until(ec.element_to_be_clickable((By.XPATH, leonard_profile)))
+    driver.find_element(By.XPATH, leonard_profile).click()
+
+    # Step 3: Get Leonard's position
+    leonard_position_locator = "//div[@class='team-grid__modal-content-description']/div[@class='team-grid__modal-content-bio--position']/p[1]"
+    WebDriverWait(driver, 5).until(ec.visibility_of_element_located((By.XPATH, leonard_position_locator)))
     leonard_position = driver.find_element(By.XPATH, leonard_position_locator).text
 
+    bio = driver.find_element(By.XPATH, Locator.leonard_bio).text
+
+    # leonard_bio = []
+    # for i in range(0, 3):
+    #     try:
+    #         bio_text = driver.find_element(By.XPATH, f"{Locator.leonard_bio}[{i}]").text
+    #         leonard_bio.append(bio_text)
+    #     except Exception as e:
+    #         print(e)
+    #         break
+    #
+    # full_bio = " ".join(leonard_bio)
+
     print(leonard_position)
-    return leonard_position
+    print(bio)
 
 
 if __name__ == "__main__":

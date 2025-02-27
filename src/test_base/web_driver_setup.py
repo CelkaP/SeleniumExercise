@@ -15,11 +15,12 @@ def web_driver_setup():
     """
     chrome_options = Options()
     chrome_options.add_argument("--headless")  # Enable headless mode
-    chrome_options.add_argument("--window-size=1400x1200")
+    chrome_options.add_argument("--window-size=1500x1240")
 
     driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()), options=chrome_options
     )
+    driver.set_window_size(1500,1240)
 
     driver.get(WEBSITE_URL)
 

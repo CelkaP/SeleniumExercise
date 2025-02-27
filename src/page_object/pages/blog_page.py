@@ -1,5 +1,8 @@
 import selenium.common
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
+
 from src.page_object.locators import Locator
 from selenium.webdriver.support import expected_conditions as ec
 
@@ -7,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as ec
 class BlogPage:
     def __init__(self, driver):
         self.__driver = driver
+        WebDriverWait(self.__driver, 2)
 
     @property
     def accept_cookies_button(self):
@@ -15,7 +19,7 @@ class BlogPage:
     @property
     def leadership(self):
         return self.__driver.find_element(
-            By.XPATH, Locator.leadership_under_about_xpath_locator
+            By.XPATH, Locator.leadership_under_about
         )
 
     @property
@@ -46,13 +50,17 @@ class BlogPage:
         self.get_in_touch_button.click()
 
     def click_accept_cookies_button(self):
-        if ec.presence_of_element_located(
-            self.accept_cookies_button
-        ) and ec.element_to_be_clickable(self.accept_cookies_button):
-            self.accept_cookies_button.click()
+        WebDriverWait(self.__driver, 10).until(
+            ec.presence_of_element_located((By.XPATH, Locator.cookies_agree_button))
+            and ec.element_to_be_clickable((By.XPATH, Locator.cookies_agree_button))
+        )
+        self.accept_cookies_button.click()
 
     def click_leadership_link(self):
-        self.leadership.click()
+        try:
+            self.leadership.click()
+        except selenium.common.exceptions.ElementNotInteractableException as e:
+            ActionChains(self.__driver).move_to_element(self.leadership).click(self.leadership).perform()
 
     def click_filter_by(self):
         self.filter_by.click()

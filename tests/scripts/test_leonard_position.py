@@ -11,6 +11,7 @@ def driver():
     driver.quit()
 
 
+
 @pytest.fixture(scope="module")
 def cached_bio(driver):
     bp = BlogPage(driver)
@@ -37,5 +38,7 @@ def test_is_leonard_position_correct(driver):
     bp.click_leadership_link()
     lp = LeadershipPage(driver)
     lp.click_on_leonard()
+
+    print(f"--------------------\n{lp.leonard_position}\n--------------------")
 
     assert lp.leonard_position == "CHIEF EXECUTIVE OFFICER AND DIRECTOR"

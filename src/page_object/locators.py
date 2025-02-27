@@ -1,11 +1,8 @@
-from selenium.webdriver.common.by import By
-
-
 class Locator(object):
     # Blog Page
     cookies_agree_button = "//button[@id='onetrust-accept-btn-handler']"
 
-    leadership_under_about_xpath_locator = "//li[@id = 'menu-item-38744']//a[@href='https://www.griddynamics.com/leadership']"
+    leadership_under_about = "//li[@id = 'menu-item-38744']//a[@href='https://www.griddynamics.com/leadership']"
 
     filter_by = "//div[@id='sub-category-list']"
 
@@ -20,12 +17,13 @@ class Locator(object):
     get_in_touch_button = "//a[@href='https://www.griddynamics.com/contact']"
 
     # Leadership Page
-    leonard = "//div [@class = 'team-grid__container team-grid__container--7']/*[1]"
+    leonard = "//div[@class='team-grid__container team-grid__container--7']/*[1]"
 
     # Leader Page
-    leonard_position = "//div [@class = 'team-grid__container team-grid__container--7']/*[2]/div[@class='team-grid__modal-content']/div[@class='team-grid__modal-content-description']/div[@class='team-grid__modal-content-bio--position']/p"
+    leonard_position = "//div[@class='team-grid__modal-content-description']/div[@class='team-grid__modal-content-bio--position']/p[1]"
+        # "//div [@class = 'team-grid__container team-grid__container--7']/*[2]/div[@class='team-grid__modal-content']/div[@class='team-grid__modal-content-description']/div[@class='team-grid__modal-content-bio--position']/p"
 
-    leonard_bio = "//div [@class = 'team-grid__container team-grid__container--7']/*[2]/div[@class='team-grid__modal-content']/div[@class='team-grid__modal-content-bio']/p/*"
+    leonard_bio = "//div [@class = 'team-grid__container team-grid__container--7']/*[2]/div[@class='team-grid__modal-content']/div[@class='team-grid__modal-content-bio']/p/*[1]"
 
     # Get In Touch Page
     first_name = "//input[@id='get-in-touch-form-first_name']"
