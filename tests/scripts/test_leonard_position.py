@@ -11,7 +11,6 @@ def driver():
     driver.quit()
 
 
-
 @pytest.fixture(scope="module")
 def cached_leonard_info(driver):
     bp = BlogPage(driver)
@@ -21,17 +20,20 @@ def cached_leonard_info(driver):
     return [lp.leonard_bio, lp.leonard_position]
 
 
-@pytest.mark.parametrize("text_to_find", [
-    "board of directors since 2006",
-    "chief executive officer of grid dynamics"
-])
+@pytest.mark.parametrize(
+    "text_to_find",
+    ["board of directors since 2006", "chief executive officer of grid dynamics"],
+)
 def test_leonard_bio(cached_leonard_info, text_to_find):
     print(f"--------------------\n{cached_leonard_info}\n--------------------")
     assert (
-            text_to_find in cached_leonard_info[0].lower()
+        text_to_find in cached_leonard_info[0].lower()
     ), f"{text_to_find} not found in bio: \n {cached_leonard_info}"
 
 
 def test_is_leonard_position_correct(cached_leonard_info):
+    position_to_find = "CHIEF EXECUTIVE OFFICER AND DIRECTOR"
     print(f"--------------------\n{cached_leonard_info[1]}\n--------------------")
-    assert (cached_leonard_info[1] == "CHIEF EXECUTIVE OFFICER AND DIRECTOR"), f" \"CHIEF EXECUTIVE OFFICER AND DIRECTOR\" not found in {cached_leonard_info[1]}"
+    assert (
+        cached_leonard_info[1] == position_to_find
+    ), f' "{position_to_find}" not found in {cached_leonard_info[1]}'

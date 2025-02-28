@@ -25,9 +25,7 @@ class BlogPage:
         WebDriverWait(self.__driver, 10).until(
             ec.element_to_be_clickable((By.XPATH, Locator.leadership_under_about))
         )
-        return self.__driver.find_element(
-            By.XPATH, Locator.leadership_under_about
-        )
+        return self.__driver.find_element(By.XPATH, Locator.leadership_under_about)
 
     @property
     def filter_by(self):
@@ -43,7 +41,7 @@ class BlogPage:
 
     @property
     def all_topics(self):
-        return self.__driver.find_elements(By.XPATH, Locator.all_topics)
+        return self.__driver.find_element(By.XPATH, Locator.all_topics)
 
     @property
     def top_articles(self):
@@ -63,7 +61,9 @@ class BlogPage:
         try:
             self.leadership.click()
         except selenium.common.exceptions.ElementNotInteractableException:
-            ActionChains(self.__driver).move_to_element(self.leadership).click(self.leadership).perform()
+            ActionChains(self.__driver).move_to_element(self.leadership).click(
+                self.leadership
+            ).perform()
 
     def click_filter_by(self):
         self.filter_by.click()

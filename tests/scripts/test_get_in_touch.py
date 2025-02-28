@@ -1,5 +1,3 @@
-# TODO: Create unit tests for get in touch
-
 import pytest
 from src.page_object.pages.blog_page import BlogPage
 from src.page_object.pages.get_in_touch_page import GetInTouchPage
@@ -11,6 +9,7 @@ def driver():
     driver = web_driver_setup()
     yield driver
     driver.quit()
+
 
 def test_is_submit_btn_inactive(driver):
     bp = BlogPage(driver)

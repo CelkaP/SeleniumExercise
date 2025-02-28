@@ -1,8 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
-
-import src.setup
 from src.page_object.locators import Locator
 from src.test_base.web_driver_setup import web_driver_setup
 from tests.scripts.test_leonard_position import driver
@@ -162,17 +160,23 @@ def find_leonard_position(driver):
 
     # Step 1: Click Leadership link
     leadership_link = "//li[@id = 'menu-item-38744']//a[contains(@href, 'leadership')]"
-    WebDriverWait(driver, 5).until(ec.element_to_be_clickable((By.XPATH, leadership_link)))
+    WebDriverWait(driver, 5).until(
+        ec.element_to_be_clickable((By.XPATH, leadership_link))
+    )
     driver.find_element(By.XPATH, leadership_link).click()
 
     # Step 2: Click Leonard's profile
     leonard_profile = "//div[contains(@class, 'team-grid__container')]/div[contains(@class, 'team-grid__item')][1]"
-    WebDriverWait(driver, 5).until(ec.element_to_be_clickable((By.XPATH, leonard_profile)))
+    WebDriverWait(driver, 5).until(
+        ec.element_to_be_clickable((By.XPATH, leonard_profile))
+    )
     driver.find_element(By.XPATH, leonard_profile).click()
 
     # Step 3: Get Leonard's position
     leonard_position_locator = "//div[@class='team-grid__modal-content-description']/div[@class='team-grid__modal-content-bio--position']/p[1]"
-    WebDriverWait(driver, 5).until(ec.visibility_of_element_located((By.XPATH, leonard_position_locator)))
+    WebDriverWait(driver, 5).until(
+        ec.visibility_of_element_located((By.XPATH, leonard_position_locator))
+    )
     leonard_position = driver.find_element(By.XPATH, leonard_position_locator).text
 
     bio = driver.find_element(By.XPATH, Locator.leonard_bio).text

@@ -20,7 +20,7 @@ def web_driver_setup():
     driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()), options=chrome_options
     )
-    driver.set_window_size(1500,1240)
+    driver.set_window_size(1500, 1240)
 
     driver.get(WEBSITE_URL)
 

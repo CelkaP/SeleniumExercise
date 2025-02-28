@@ -12,7 +12,6 @@ class LeadershipPage:
         self.__driver = driver
         WebDriverWait(self.__driver, 2)
 
-
     @property
     def leonard(self):
         WebDriverWait(self.__driver, 5).until(
@@ -38,4 +37,6 @@ class LeadershipPage:
         try:
             self.leonard.click()
         except selenium.common.exceptions.ElementNotInteractableException as e:
-            ActionChains(self.__driver).move_to_element(self.leonard).click(self.leonard).perform()
+            ActionChains(self.__driver).move_to_element(self.leonard).click(
+                self.leonard
+            ).perform()

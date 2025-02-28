@@ -21,7 +21,7 @@ class Locator(object):
 
     # Leader Page
     leonard_position = "//div[@class='team-grid__modal-content-description']/div[@class='team-grid__modal-content-bio--position']/p[1]"
-        # "//div [@class = 'team-grid__container team-grid__container--7']/*[2]/div[@class='team-grid__modal-content']/div[@class='team-grid__modal-content-description']/div[@class='team-grid__modal-content-bio--position']/p"
+    # "//div [@class = 'team-grid__container team-grid__container--7']/*[2]/div[@class='team-grid__modal-content']/div[@class='team-grid__modal-content-description']/div[@class='team-grid__modal-content-bio--position']/p"
 
     leonard_bio = "//div [@class = 'team-grid__container team-grid__container--7']/*[2]/div[@class='team-grid__modal-content']/div[@class='team-grid__modal-content-bio']/p/*[1]"
 
